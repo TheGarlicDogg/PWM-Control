@@ -71,6 +71,7 @@ void Application::on_pushButton_clicked()
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
+        QTimer::singleShot(time*1000, 0, QApplication::beep);
        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу всех клиентов c параметрами { "+ ui->spinBox_Freq->text()+ " Гц, " + ui->spinBox_DutyCycle->text()+"%, " +Timer.toString("hh:mm:ss") + " }";
     } else{
         foreach(QTcpSocket *socket, Client_Connection_List){
@@ -78,10 +79,10 @@ void Application::on_pushButton_clicked()
                 socket->write(Message_For_Client.toStdString().c_str());
             }
         }
+        QTimer::singleShot(time*1000, 0, QApplication::beep);
         Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу клиента " + Receiver + " c параметрами { "+ ui->spinBox_Freq->text()+ " Гц, " + ui->spinBox_DutyCycle->text()+"%, " +Timer.toString("hh:mm:ss") + " }";
     }
     ui->textEdit_Client_Messages->append(Log_Message);
-    QTimer::singleShot(time*1000, 0, QApplication::beep);
 }
 void Application::socketDisconnected(QAbstractSocket::SocketState state)
 {
