@@ -34,9 +34,10 @@ void Application::newConnection()
 
 void Application::Add_New_Client_Connection(QTcpSocket *socket)
 {
+    connect(socket, &QAbstractSocket::stateChanged, this, &Application::socketDisconnected);
     Client_Connection_List.append(socket);
     ui->comboBox_Client_List->addItem(QString::number(socket->socketDescriptor()));
-    QString Client = "Клиент " + QString::number(socket->socketDescriptor()) + ": Подключился к серверу";
+    QString Client = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Клиент " + QString::number(socket->socketDescriptor()) + ": Подключился к серверу";
     ui->textEdit_Client_Messages->append(Client);
 }
 /*
@@ -65,42 +66,49 @@ void Application::on_pushButton_clicked()
     QString Receiver = ui->comboBox_Client_List->currentText();
     QString Log_Message;
     if(Client_Connection_List.empty()){
-        Log_Message = "К серверу не подключен ни один клиент";
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> К серверу не подключен ни один клиент";
     } else if(ui->comboBox_Client_List->currentText() == "Всем"){
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-       Log_Message = "Сервер запустил работу всех клиентов";
+       Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу всех клиентов c параметрами { "+ ui->spinBox_Freq->text()+ " Гц, " + ui->spinBox_DutyCycle->text()+"%, " +Timer.toString("hh:mm:ss") + " }";
     } else{
         foreach(QTcpSocket *socket, Client_Connection_List){
             if(socket->socketDescriptor()== Receiver.toLongLong()){
                 socket->write(Message_For_Client.toStdString().c_str());
             }
         }
-        Log_Message = "Сервер запустил работу клиента " + Receiver;
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу клиента " + Receiver + " c параметрами { "+ ui->spinBox_Freq->text()+ " Гц, " + ui->spinBox_DutyCycle->text()+"%, " +Timer.toString("hh:mm:ss") + " }";
     }
     ui->textEdit_Client_Messages->append(Log_Message);
+    QTimer::singleShot(time*1000, 0, QApplication::beep);
 }
-
+void Application::socketDisconnected(QAbstractSocket::SocketState state)
+{
+    QTcpSocket *socket = reinterpret_cast<QTcpSocket*>(sender());
+    QString Client = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Клиент " + QString::number(socket->socketDescriptor()) + ": Отключился от сервера";
+    ui->textEdit_Client_Messages->append(Client);
+    qDebug() << "disc " << state;
+}
 void Application::on_pushButton_2_clicked()
 {
     QString Message_For_Client = "cs"; //command_exit
     QString Receiver = ui->comboBox_Client_List->currentText();
     QString Log_Message;
     if(Client_Connection_List.empty()){
-        Log_Message = "К серверу не подключен ни один клиент";
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> К серверу не подключен ни один клиент";
     } else if(ui->comboBox_Client_List->currentText() == "Всем"){
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-       Log_Message = "Сервер остановил работу всех клиентов";
+       Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер остановил работу всех клиентов";
     } else{
         foreach(QTcpSocket *socket, Client_Connection_List){
             if(socket->socketDescriptor()== Receiver.toLongLong()){
                 socket->write(Message_For_Client.toStdString().c_str());
             }
         }
-        Log_Message = "Сервер остановил работу клиента " + Receiver;
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер остановил работу клиента " + Receiver;
     }
     ui->textEdit_Client_Messages->append(Log_Message);
 }

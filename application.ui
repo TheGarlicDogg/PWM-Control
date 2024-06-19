@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>430</height>
+    <height>416</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>416</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>416</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -76,9 +88,9 @@
    <widget class="QTextEdit" name="textEdit_Client_Messages">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>470</x>
       <y>10</y>
-      <width>201</width>
+      <width>321</width>
       <height>321</height>
      </rect>
     </property>
@@ -88,6 +100,9 @@
       <weight>50</weight>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label">
