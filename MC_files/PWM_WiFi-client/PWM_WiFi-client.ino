@@ -9,7 +9,7 @@
 #define LEDC_BASE_FREQ          200           // Гц
 
 String output;
-const char* ssid = "garlicdogg_pc";
+const char* ssid = "garlicdogg_laptop";
 const char* password = "gar123lic";
 WiFiClient client;
 int config[3];

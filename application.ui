@@ -34,7 +34,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">и</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
@@ -296,16 +296,6 @@
      <string>Стоп</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>26</height>
-    </rect>
-   </property>
   </widget>
  </widget>
  <resources/>
