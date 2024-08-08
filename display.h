@@ -15,6 +15,7 @@ class Display : public QMainWindow
 
 public:
     explicit Display(QWidget *parent = nullptr);
+    explicit Display(QString filename, QWidget *parent = nullptr);
 
     void displayData();
 
@@ -39,7 +40,10 @@ private slots:
 
     void on_ZoomButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
+    QString filename;
     edflib_hdr_t hdr;
     double shift;
     int duration;

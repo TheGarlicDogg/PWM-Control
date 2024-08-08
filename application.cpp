@@ -6,13 +6,14 @@ Application::Application(QWidget *parent)
     , ui(new Ui::Application)
 {
     ui->setupUi(this);
-
+    this->setAttribute(Qt::WA_DeleteOnClose);
     TCP_Server = new QTcpServer();
    if(!TCP_Server->listen(QHostAddress::Any, 8080)){
        QMessageBox::information(this,"Контроль светодиода","Неудачный запуск сервера");
    } else{
        connect(TCP_Server, SIGNAL(newConnection()), this, SLOT(newConnection()));
    }
+   qDebug() << TCP_Server->errorString();
    setWindowTitle("Контроль ШИМ");
    ui->timeEdit->setCurrentSection(QDateTimeEdit::SecondSection);
 }
@@ -22,6 +23,8 @@ Application::~Application()
     foreach(QTcpSocket *socket, Client_Connection_List){
         socket->write("ce");
     }
+    TCP_Server->close();
+    this->close();
     delete ui;
 }
 

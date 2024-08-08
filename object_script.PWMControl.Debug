@@ -1,0 +1,11 @@
+debug/qrc_resources.o
+debug/display.o
+debug/edflib.o
+debug/main.o
+debug/application.o
+debug/menu.o
+debug/qcustomplot.o
+debug/moc_application.o
+debug/moc_display.o
+debug/moc_menu.o
+debug/moc_qcustomplot.o

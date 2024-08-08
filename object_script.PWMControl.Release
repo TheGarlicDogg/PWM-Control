@@ -1,0 +1,11 @@
+release/qrc_resources.o
+release/display.o
+release/edflib.o
+release/main.o
+release/application.o
+release/menu.o
+release/qcustomplot.o
+release/moc_application.o
+release/moc_display.o
+release/moc_menu.o
+release/moc_qcustomplot.o

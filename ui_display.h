@@ -11,16 +11,15 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -35,7 +34,6 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame_2;
     QGridLayout *gridLayout;
-    QCustomPlot *customPlot;
     QFrame *frame_3;
     QVBoxLayout *verticalLayout_2;
     QListWidget *allSignalsList;
@@ -44,18 +42,19 @@ public:
     QPushButton *addSignalsButton;
     QListWidget *selectedSignalsList;
     QPushButton *submitSignalsButton;
+    QCustomPlot *customPlot;
     QSlider *timeSlider;
+    QFrame *frame_5;
+    QHBoxLayout *horizontalLayout_2;
     QFrame *frame;
     QPushButton *MoveLeftButton;
     QPushButton *MoveRightButton;
     QPushButton *PlayButton;
     QPushButton *StopButton;
     QPushButton *ZoomButton;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton;
     QStatusBar *statusBar;
-    QMenuBar *menuBar;
-    QMenu *menu123;
-    QMenu *menu123_2;
-    QMenu *menu322;
 
     void setupUi(QMainWindow *Display)
     {
@@ -84,17 +83,6 @@ public:
         frame_2->setFrameShadow(QFrame::Raised);
         gridLayout = new QGridLayout(frame_2);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        customPlot = new QCustomPlot(frame_2);
-        customPlot->setObjectName(QString::fromUtf8("customPlot"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(customPlot->sizePolicy().hasHeightForWidth());
-        customPlot->setSizePolicy(sizePolicy1);
-        customPlot->setMinimumSize(QSize(550, 490));
-
-        gridLayout->addWidget(customPlot, 0, 0, 1, 1);
-
         frame_3 = new QFrame(frame_2);
         frame_3->setObjectName(QString::fromUtf8("frame_3"));
         frame_3->setMinimumSize(QSize(162, 490));
@@ -129,6 +117,9 @@ public:
         addSignalsButton->setObjectName(QString::fromUtf8("addSignalsButton"));
         addSignalsButton->setGeometry(QRect(0, 0, 80, 40));
         addSignalsButton->setMinimumSize(QSize(80, 40));
+        QFont font;
+        font.setPointSize(8);
+        addSignalsButton->setFont(font);
 
         verticalLayout_2->addWidget(frame_4);
 
@@ -155,8 +146,17 @@ public:
 
         gridLayout->addWidget(frame_3, 0, 1, 1, 1);
 
-        frame_3->raise();
-        customPlot->raise();
+        customPlot = new QCustomPlot(frame_2);
+        customPlot->setObjectName(QString::fromUtf8("customPlot"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(customPlot->sizePolicy().hasHeightForWidth());
+        customPlot->setSizePolicy(sizePolicy1);
+        customPlot->setMinimumSize(QSize(550, 490));
+
+        gridLayout->addWidget(customPlot, 0, 0, 1, 1);
+
 
         verticalLayout->addWidget(frame_2);
 
@@ -172,7 +172,17 @@ public:
 
         verticalLayout->addWidget(timeSlider);
 
-        frame = new QFrame(centralwidget);
+        frame_5 = new QFrame(centralwidget);
+        frame_5->setObjectName(QString::fromUtf8("frame_5"));
+        frame_5->setMinimumSize(QSize(300, 40));
+        frame_5->setMaximumSize(QSize(16777215, 40));
+        frame_5->setFrameShape(QFrame::StyledPanel);
+        frame_5->setFrameShadow(QFrame::Raised);
+        horizontalLayout_2 = new QHBoxLayout(frame_5);
+        horizontalLayout_2->setSpacing(0);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        frame = new QFrame(frame_5);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMinimumSize(QSize(240, 40));
         frame->setMaximumSize(QSize(240, 40));
@@ -183,8 +193,6 @@ public:
         MoveLeftButton->setGeometry(QRect(100, 0, 40, 40));
         MoveLeftButton->setMinimumSize(QSize(40, 40));
         MoveLeftButton->setMaximumSize(QSize(40, 40));
-        QFont font;
-        font.setPointSize(6);
         MoveLeftButton->setFont(font);
         QIcon icon;
         icon.addFile(QString::fromUtf8("imgs/left-button.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -229,29 +237,31 @@ public:
         ZoomButton->setIcon(icon4);
         ZoomButton->setIconSize(QSize(24, 24));
 
-        verticalLayout->addWidget(frame);
+        horizontalLayout_2->addWidget(frame);
+
+        horizontalSpacer = new QSpacerItem(497, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+        pushButton = new QPushButton(frame_5);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setMinimumSize(QSize(40, 40));
+        pushButton->setMaximumSize(QSize(40, 40));
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8("imgs/information-button.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon5);
+        pushButton->setIconSize(QSize(24, 24));
+
+        horizontalLayout_2->addWidget(pushButton);
+
+
+        verticalLayout->addWidget(frame_5);
 
         Display->setCentralWidget(centralwidget);
         statusBar = new QStatusBar(Display);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         statusBar->setSizeGripEnabled(false);
         Display->setStatusBar(statusBar);
-        menuBar = new QMenuBar(Display);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 26));
-        menu123 = new QMenu(menuBar);
-        menu123->setObjectName(QString::fromUtf8("menu123"));
-        menu123_2 = new QMenu(menuBar);
-        menu123_2->setObjectName(QString::fromUtf8("menu123_2"));
-        menu322 = new QMenu(menuBar);
-        menu322->setObjectName(QString::fromUtf8("menu322"));
-        Display->setMenuBar(menuBar);
-
-        menuBar->addAction(menu123->menuAction());
-        menuBar->addAction(menu123_2->menuAction());
-        menuBar->addAction(menu322->menuAction());
-        menu322->addSeparator();
-        menu322->addSeparator();
 
         retranslateUi(Display);
 
@@ -264,14 +274,30 @@ public:
         removeSignalsButton->setText(QCoreApplication::translate("Display", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", nullptr));
         addSignalsButton->setText(QCoreApplication::translate("Display", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
         submitSignalsButton->setText(QCoreApplication::translate("Display", "\320\222\321\213\320\262\320\265\321\201\321\202\320\270 \321\201\320\270\320\263\320\275\320\260\320\273\321\213", nullptr));
+#if QT_CONFIG(tooltip)
+        MoveLeftButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>1 \321\201\320\265\320\272. \320\275\320\260\320\267\320\260\320\264</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         MoveLeftButton->setText(QString());
+#if QT_CONFIG(tooltip)
+        MoveRightButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>1 \321\201\320\265\320\272. \320\262\320\277\320\265\321\200\320\265\320\264</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         MoveRightButton->setText(QString());
+#if QT_CONFIG(tooltip)
+        PlayButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\222\320\276\321\201\320\277\321\200\320\276\320\270\320\267\320\262\320\265\320\264\320\265\320\275\320\270\320\265</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        PlayButton->setWhatsThis(QCoreApplication::translate("Display", "<html><head/><body><p><br/></p></body></html>", nullptr));
+#endif // QT_CONFIG(whatsthis)
         PlayButton->setText(QString());
+#if QT_CONFIG(tooltip)
+        StopButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\241\321\202\320\276\320\277</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         StopButton->setText(QString());
+#if QT_CONFIG(tooltip)
+        ZoomButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\230\321\201\321\205\320\276\320\264\320\275\320\276\320\265 \320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\272\320\260\320\274\320\265\321\200\321\213</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         ZoomButton->setText(QString());
-        menu123->setTitle(QCoreApplication::translate("Display", "123", nullptr));
-        menu123_2->setTitle(QCoreApplication::translate("Display", "123", nullptr));
-        menu322->setTitle(QCoreApplication::translate("Display", "322", nullptr));
+        pushButton->setText(QString());
     } // retranslateUi
 
 };

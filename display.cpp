@@ -1,6 +1,5 @@
 #include "display.h"
 #include "ui_display.h"
-
 Display::Display(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Display)
@@ -16,7 +15,20 @@ Display::Display(QWidget *parent) :
     ui->customPlot->replot();
     ui->statusBar->hide();
 }
-
+Display::Display(QString fileadr, QWidget *parent) : QMainWindow(parent),
+    ui(new Ui::Display)
+{
+    filename = fileadr;
+    ui->setupUi(this);
+    setupDisplayData(ui->customPlot);
+    setWindowTitle("Отображение ЭЭГ");
+    statusBar()->clearMessage();
+    ui->customPlot->axisRect()->setRangeZoom(Qt::Horizontal);
+    connect(ui->customPlot, SIGNAL(mouseWheel(QWheelEvent*)), this, SLOT(mouseWheel(QWheelEvent*)));
+    ui->customPlot->setInteractions(QCP::iRangeZoom);
+    ui->customPlot->replot();
+    ui->statusBar->hide();
+}
 Display::~Display()
 {
     delete ui;
@@ -38,7 +50,7 @@ void Display::displayData()
 
         samples_in_channel;
 
-    if (edfopen_file_readonly("EdfFiles/Subj 2 Test After.edf", &hdr, EDFLIB_READ_ALL_ANNOTATIONS))
+    if (edfopen_file_readonly(filename.toStdString().c_str(), &hdr, EDFLIB_READ_ALL_ANNOTATIONS))
     {
         switch (hdr.filetype)
         {
@@ -180,7 +192,7 @@ void Display::on_removeSignalsButton_clicked()
 void Display::on_submitSignalsButton_clicked()
 {
     ui->customPlot->clearGraphs();
-    if (edfopen_file_readonly("EdfFiles/Subj 2 Test After.edf", &hdr, EDFLIB_READ_ALL_ANNOTATIONS))
+    if (edfopen_file_readonly(filename.toStdString().c_str(), &hdr, EDFLIB_READ_ALL_ANNOTATIONS))
     {
         switch (hdr.filetype)
         {
@@ -262,4 +274,9 @@ void Display::on_ZoomButton_clicked()
 {
     ui->customPlot->yAxis->rescale();
     ui->customPlot->replot();
+}
+
+void Display::on_pushButton_clicked()
+{
+    QMessageBox::information(this, "Управление", "Колесо мыши - перемещение по оси X<br>Колесо мыши + Ctrl - приближение/отдаление по горизонтальной оси<br>Колесо мыши + Shift - приближение/отдаление по обеим осям");
 }

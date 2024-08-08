@@ -20,17 +20,20 @@ SOURCES += \
     edflib.c \
     main.cpp \
     application.cpp \
+    menu.cpp \
     qcustomplot.cpp
 
 HEADERS += \
     application.h \
     display.h \
     edflib.h \
+    menu.h \
     qcustomplot.h
 
 FORMS += \
     application.ui \
-    display.ui
+    display.ui \
+    menu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
