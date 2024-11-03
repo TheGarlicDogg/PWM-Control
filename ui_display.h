@@ -32,9 +32,9 @@ class Ui_Display
 public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QFrame *frame_2;
+    QFrame *plotSignals;
     QGridLayout *gridLayout;
-    QFrame *frame_3;
+    QFrame *signalsContol;
     QVBoxLayout *verticalLayout_2;
     QListWidget *allSignalsList;
     QFrame *frame_4;
@@ -42,9 +42,11 @@ public:
     QPushButton *addSignalsButton;
     QListWidget *selectedSignalsList;
     QPushButton *submitSignalsButton;
+    QFrame *plotsFrame;
+    QGridLayout *gridLayout_2;
     QCustomPlot *customPlot;
     QSlider *timeSlider;
-    QFrame *frame_5;
+    QFrame *controls;
     QHBoxLayout *horizontalLayout_2;
     QFrame *frame;
     QPushButton *MoveLeftButton;
@@ -76,24 +78,24 @@ public:
         centralwidget->setSizeIncrement(QSize(0, 0));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        frame_2 = new QFrame(centralwidget);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setMinimumSize(QSize(780, 490));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        gridLayout = new QGridLayout(frame_2);
+        plotSignals = new QFrame(centralwidget);
+        plotSignals->setObjectName(QString::fromUtf8("plotSignals"));
+        plotSignals->setMinimumSize(QSize(780, 490));
+        plotSignals->setFrameShape(QFrame::StyledPanel);
+        plotSignals->setFrameShadow(QFrame::Raised);
+        gridLayout = new QGridLayout(plotSignals);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        frame_3 = new QFrame(frame_2);
-        frame_3->setObjectName(QString::fromUtf8("frame_3"));
-        frame_3->setMinimumSize(QSize(162, 490));
-        frame_3->setMaximumSize(QSize(160, 16777215));
-        frame_3->setFrameShape(QFrame::StyledPanel);
-        frame_3->setFrameShadow(QFrame::Raised);
-        verticalLayout_2 = new QVBoxLayout(frame_3);
+        signalsContol = new QFrame(plotSignals);
+        signalsContol->setObjectName(QString::fromUtf8("signalsContol"));
+        signalsContol->setMinimumSize(QSize(162, 490));
+        signalsContol->setMaximumSize(QSize(160, 16777215));
+        signalsContol->setFrameShape(QFrame::StyledPanel);
+        signalsContol->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(signalsContol);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        allSignalsList = new QListWidget(frame_3);
+        allSignalsList = new QListWidget(signalsContol);
         allSignalsList->setObjectName(QString::fromUtf8("allSignalsList"));
         allSignalsList->setMinimumSize(QSize(160, 192));
         allSignalsList->setMaximumSize(QSize(160, 16777215));
@@ -103,7 +105,7 @@ public:
 
         verticalLayout_2->addWidget(allSignalsList);
 
-        frame_4 = new QFrame(frame_3);
+        frame_4 = new QFrame(signalsContol);
         frame_4->setObjectName(QString::fromUtf8("frame_4"));
         frame_4->setMinimumSize(QSize(160, 40));
         frame_4->setMaximumSize(QSize(160, 40));
@@ -123,7 +125,7 @@ public:
 
         verticalLayout_2->addWidget(frame_4);
 
-        selectedSignalsList = new QListWidget(frame_3);
+        selectedSignalsList = new QListWidget(signalsContol);
         selectedSignalsList->setObjectName(QString::fromUtf8("selectedSignalsList"));
         selectedSignalsList->setMinimumSize(QSize(160, 192));
         selectedSignalsList->setMaximumSize(QSize(160, 16777215));
@@ -136,7 +138,7 @@ public:
 
         verticalLayout_2->addWidget(selectedSignalsList);
 
-        submitSignalsButton = new QPushButton(frame_3);
+        submitSignalsButton = new QPushButton(signalsContol);
         submitSignalsButton->setObjectName(QString::fromUtf8("submitSignalsButton"));
         submitSignalsButton->setMinimumSize(QSize(160, 40));
         submitSignalsButton->setMaximumSize(QSize(160, 16777215));
@@ -144,21 +146,33 @@ public:
         verticalLayout_2->addWidget(submitSignalsButton);
 
 
-        gridLayout->addWidget(frame_3, 0, 1, 1, 1);
+        gridLayout->addWidget(signalsContol, 0, 1, 1, 1);
 
-        customPlot = new QCustomPlot(frame_2);
-        customPlot->setObjectName(QString::fromUtf8("customPlot"));
+        plotsFrame = new QFrame(plotSignals);
+        plotsFrame->setObjectName(QString::fromUtf8("plotsFrame"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(plotsFrame->sizePolicy().hasHeightForWidth());
+        plotsFrame->setSizePolicy(sizePolicy1);
+        plotsFrame->setMinimumSize(QSize(590, 490));
+        plotsFrame->setFrameShape(QFrame::StyledPanel);
+        plotsFrame->setFrameShadow(QFrame::Raised);
+        gridLayout_2 = new QGridLayout(plotsFrame);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        customPlot = new QCustomPlot(plotsFrame);
+        customPlot->setObjectName(QString::fromUtf8("customPlot"));
         sizePolicy1.setHeightForWidth(customPlot->sizePolicy().hasHeightForWidth());
         customPlot->setSizePolicy(sizePolicy1);
-        customPlot->setMinimumSize(QSize(550, 490));
+        customPlot->setMinimumSize(QSize(550, 245));
 
-        gridLayout->addWidget(customPlot, 0, 0, 1, 1);
+        gridLayout_2->addWidget(customPlot, 0, 0, 1, 1);
 
 
-        verticalLayout->addWidget(frame_2);
+        gridLayout->addWidget(plotsFrame, 0, 0, 1, 1);
+
+
+        verticalLayout->addWidget(plotSignals);
 
         timeSlider = new QSlider(centralwidget);
         timeSlider->setObjectName(QString::fromUtf8("timeSlider"));
@@ -172,17 +186,17 @@ public:
 
         verticalLayout->addWidget(timeSlider);
 
-        frame_5 = new QFrame(centralwidget);
-        frame_5->setObjectName(QString::fromUtf8("frame_5"));
-        frame_5->setMinimumSize(QSize(300, 40));
-        frame_5->setMaximumSize(QSize(16777215, 40));
-        frame_5->setFrameShape(QFrame::StyledPanel);
-        frame_5->setFrameShadow(QFrame::Raised);
-        horizontalLayout_2 = new QHBoxLayout(frame_5);
+        controls = new QFrame(centralwidget);
+        controls->setObjectName(QString::fromUtf8("controls"));
+        controls->setMinimumSize(QSize(300, 40));
+        controls->setMaximumSize(QSize(16777215, 40));
+        controls->setFrameShape(QFrame::StyledPanel);
+        controls->setFrameShadow(QFrame::Raised);
+        horizontalLayout_2 = new QHBoxLayout(controls);
         horizontalLayout_2->setSpacing(0);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        frame = new QFrame(frame_5);
+        frame = new QFrame(controls);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMinimumSize(QSize(240, 40));
         frame->setMaximumSize(QSize(240, 40));
@@ -243,7 +257,7 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer);
 
-        pushButton = new QPushButton(frame_5);
+        pushButton = new QPushButton(controls);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setMinimumSize(QSize(40, 40));
         pushButton->setMaximumSize(QSize(40, 40));
@@ -255,7 +269,7 @@ public:
         horizontalLayout_2->addWidget(pushButton);
 
 
-        verticalLayout->addWidget(frame_5);
+        verticalLayout->addWidget(controls);
 
         Display->setCentralWidget(centralwidget);
         statusBar = new QStatusBar(Display);

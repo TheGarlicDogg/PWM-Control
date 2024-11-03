@@ -84,14 +84,44 @@
       <string>Всем</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>1 &amp; 2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>1 &amp; 3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>2 &amp; 3</string>
+     </property>
+    </item>
    </widget>
    <widget class="QTextEdit" name="textEdit_Client_Messages">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>480</x>
       <y>10</y>
-      <width>321</width>
-      <height>321</height>
+      <width>311</width>
+      <height>320</height>
      </rect>
     </property>
     <property name="font">
@@ -109,9 +139,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>10</y>
-      <width>291</width>
-      <height>41</height>
+      <y>60</y>
+      <width>241</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -123,16 +153,16 @@
      <bool>true</bool>
     </property>
     <property name="text">
-     <string>Частота (0-1000, Гц)</string>
+     <string>Частота (10-1000, Гц)</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
-      <width>301</width>
-      <height>51</height>
+      <y>150</y>
+      <width>271</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -151,9 +181,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>220</y>
-      <width>341</width>
-      <height>51</height>
+      <y>240</y>
+      <width>321</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -172,9 +202,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
-      <width>161</width>
-      <height>41</height>
+      <y>100</y>
+      <width>120</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="font">
@@ -195,7 +225,7 @@
      <string notr="true"/>
     </property>
     <property name="minimum">
-     <number>0</number>
+     <number>10</number>
     </property>
     <property name="maximum">
      <number>1000</number>
@@ -212,8 +242,8 @@
      <rect>
       <x>20</x>
       <y>280</y>
-      <width>161</width>
-      <height>41</height>
+      <width>120</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="font">
@@ -228,7 +258,7 @@
      <bool>false</bool>
     </property>
     <property name="currentSection">
-     <enum>QDateTimeEdit::HourSection</enum>
+     <enum>QDateTimeEdit::SecondSection</enum>
     </property>
     <property name="displayFormat">
      <string>HH:mm:ss</string>
@@ -236,14 +266,17 @@
     <property name="calendarPopup">
      <bool>false</bool>
     </property>
+    <property name="currentSectionIndex">
+     <number>2</number>
+    </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_DutyCycle">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>170</y>
-      <width>161</width>
-      <height>41</height>
+      <y>190</y>
+      <width>120</width>
+      <height>30</height>
      </rect>
     </property>
     <property name="font">
@@ -296,6 +329,360 @@
      <string>Стоп</string>
     </property>
    </widget>
+   <widget class="QSpinBox" name="spinBox_Freq_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>100</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="wrapping">
+     <bool>true</bool>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="suffix">
+     <string notr="true"/>
+    </property>
+    <property name="minimum">
+     <number>10</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="singleStep">
+     <number>10</number>
+    </property>
+    <property name="value">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_Freq_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>100</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="wrapping">
+     <bool>true</bool>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="suffix">
+     <string notr="true"/>
+    </property>
+    <property name="minimum">
+     <number>10</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="singleStep">
+     <number>10</number>
+    </property>
+    <property name="value">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_DutyCycle_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>190</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="wrapping">
+     <bool>true</bool>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="singleStep">
+     <number>5</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox_DutyCycle_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>190</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="wrapping">
+     <bool>true</bool>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="singleStep">
+     <number>5</number>
+    </property>
+    <property name="value">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QTimeEdit" name="timeEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>280</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="currentSection">
+     <enum>QDateTimeEdit::SecondSection</enum>
+    </property>
+    <property name="displayFormat">
+     <string>HH:mm:ss</string>
+    </property>
+    <property name="calendarPopup">
+     <bool>false</bool>
+    </property>
+    <property name="currentSectionIndex">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QTimeEdit" name="timeEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>280</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="currentSection">
+     <enum>QDateTimeEdit::SecondSection</enum>
+    </property>
+    <property name="displayFormat">
+     <string>HH:mm:ss</string>
+    </property>
+    <property name="calendarPopup">
+     <bool>false</bool>
+    </property>
+    <property name="currentSectionIndex">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>Датчик 1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>10</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>Датчик 2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>10</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>Датчик 3</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>40</y>
+      <width>481</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>0</y>
+      <width>16</width>
+      <height>48</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>0</y>
+      <width>16</width>
+      <height>49</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>322</y>
+      <width>481</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <zorder>line_3</zorder>
+   <zorder>line_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>comboBox_Client_List</zorder>
+   <zorder>textEdit_Client_Messages</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>spinBox_Freq</zorder>
+   <zorder>timeEdit</zorder>
+   <zorder>spinBox_DutyCycle</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>spinBox_Freq_2</zorder>
+   <zorder>spinBox_Freq_3</zorder>
+   <zorder>spinBox_DutyCycle_2</zorder>
+   <zorder>spinBox_DutyCycle_3</zorder>
+   <zorder>timeEdit_2</zorder>
+   <zorder>timeEdit_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
+   <zorder>label_6</zorder>
+   <zorder>line</zorder>
+   <zorder>line_4</zorder>
   </widget>
  </widget>
  <resources/>

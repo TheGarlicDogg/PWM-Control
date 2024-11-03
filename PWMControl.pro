@@ -39,10 +39,3 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-DISTFILES += \
-    Subj 2 Test After.edf \
-    Subj 2 Test After.edf
-
-RESOURCES += \
-    resources.qrc

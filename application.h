@@ -24,18 +24,15 @@ public:
     Application(QWidget *parent = nullptr);
     ~Application();
 
-//    void setupRealtimeData(QCustomPlot *customPlot);
-
 private slots:
     void newConnection();
-//    void Read_Data_From_Socket();
     void on_pushButton_clicked();
     void socketDisconnected(QAbstractSocket::SocketState state);
     void on_pushButton_2_clicked();
 
 private:
     void Add_New_Client_Connection(QTcpSocket *socket);
-    void standaloneFunc();
+    QString getSensorsLogText(int num);
 
 private:
     Ui::Application *ui;

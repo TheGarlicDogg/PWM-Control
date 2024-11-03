@@ -1,4 +1,3 @@
-debug/qrc_resources.o
 debug/display.o
 debug/edflib.o
 debug/main.o

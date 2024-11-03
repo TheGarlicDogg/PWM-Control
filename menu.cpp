@@ -39,6 +39,7 @@ void Menu::on_edfDisplayAppButton_clicked()
             return;
         }
     }
+
     Display* display = new Display(fileName);
     display->setWindowModality(Qt::ApplicationModal);
     display->show();

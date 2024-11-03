@@ -279,8 +279,7 @@ Makefile: PWMControl.pro C:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/win32-g++/qmak
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Network.prl \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Core.prl \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/qtmain.prl \
-		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf \
-		resources.qrc
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile PWMControl.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 C:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/spec_pre.prf:
 C:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/qdevice.pri:
@@ -492,7 +491,6 @@ C:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Network.prl:
 C:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/Qt5Core.prl:
 C:/Qt/Qt5.14.2/5.14.2/mingw73_64/lib/qtmain.prl:
 C:/Qt/Qt5.14.2/5.14.2/mingw73_64/mkspecs/features/build_pass.prf:
-resources.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile PWMControl.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 
