@@ -3,7 +3,6 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 CONFIG += c++11
-CONFIG += resources_big
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -27,6 +26,7 @@ HEADERS += \
     application.h \
     display.h \
     edflib.h \
+    fftw3.h \
     menu.h \
     qcustomplot.h
 
@@ -39,3 +39,8 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32: LIBS += -L$$PWD/../../libs/fftw-3.3.5-dll64/lib/ -llibfftw3-3
+
+INCLUDEPATH += $$PWD/../../libs/fftw-3.3.5-dll64
+DEPENDPATH += $$PWD/../../libs/fftw-3.3.5-dll64

@@ -1,9 +1,13 @@
 #include "display.h"
 #include "ui_display.h"
+#include "fftw3.h"
 #include <QPushButton>
 #include <QTimer>
 
 // does not check if compared file has different signals
+
+#define REAL 0
+#define IMAG 1
 
 Display::Display(QWidget *parent) :
     QMainWindow(parent),
@@ -54,16 +58,16 @@ Display::~Display()
 
 void Display::setupDisplayData(QCustomPlot *customPlot)
 {
-  QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
-  timeTicker->setTimeFormat("%h:%m:%s");
-  customPlot->xAxis->setTicker(timeTicker);
-  customPlot->axisRect()->setupFullAxesBox();
-  customPlot->setBackground(QColor(64, 64, 64));
-  customPlot->xAxis->setTickLabelColor(QColor(255,255,255));
-  customPlot->yAxis->setTickLabelColor(QColor(255,255,255));
-  customPlot->xAxis->setLabelColor(QColor(255,255,255));
-  customPlot->yAxis->setLabelColor(QColor(255,255,255));
-  customPlot->replot();
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    customPlot->xAxis->setTicker(timeTicker);
+    customPlot->axisRect()->setupFullAxesBox();
+    customPlot->setBackground(QColor(64, 64, 64));
+    customPlot->xAxis->setTickLabelColor(QColor(255,255,255));
+    customPlot->yAxis->setTickLabelColor(QColor(255,255,255));
+    customPlot->xAxis->setLabelColor(QColor(255,255,255));
+    customPlot->yAxis->setLabelColor(QColor(255,255,255));
+    customPlot->replot();
 }
 void Display::displaySignals()
 {
@@ -192,7 +196,8 @@ void Display::on_submitSignalsButton_clicked()
         }
     }
     int handle2 = edflib_get_handle(1);
-    double shift = 1/(((double)hdr.signalparam[0].smp_in_file / (double)hdr.file_duration) * EDFLIB_TIME_DIMENSION);
+    int samplerate = hdr.signalparam[0].smp_in_datarecord;
+    double shift = 1/double(samplerate);
     int samples_in_channel = hdr.signalparam[0].smp_in_file;
     double* buf,* buf2;
     buf = (double*)malloc(sizeof(double[samples_in_channel]));
@@ -210,11 +215,14 @@ void Display::on_submitSignalsButton_clicked()
         return;
     }
     int channel;
-    int x = 0; /* start reading x seconds from start of file */
+    //int x = 0; /* start reading x seconds from start of file */
     int gap = 70;
     //double physMinRange, physMaxRange;
 
-
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    ui->customPlot->xAxis->setTicker(timeTicker);
+    if(isComparePlotActive) comparePlot->xAxis->setTicker(timeTicker);
     QPen pen;
     for(int j = 0; j < ui->selectedSignalsList->count(); j++){
 
@@ -223,11 +231,11 @@ void Display::on_submitSignalsButton_clicked()
         //pen.setColor(QColor((175+(ui->customPlot->graphCount()%9*70))%256, (10+(ui->customPlot->graphCount()%9*80))%256, (90+(ui->customPlot->graphCount()%9*60))%256));
         ui->customPlot->addGraph();
         ui->customPlot->graph()->setPen(pen);
-        edfseek(0, 0, (long long)((((double)x) / ((double)hdr.file_duration / (double)EDFLIB_TIME_DIMENSION)) * ((double)hdr.signalparam[channel].smp_in_file)), EDFSEEK_SET);
+        //edfseek(0, 0, (long long)((((double)x) / ((double)hdr.file_duration / (double)EDFLIB_TIME_DIMENSION)) * ((double)hdr.signalparam[channel].smp_in_file)), EDFSEEK_SET);
         if(isComparePlotActive){
             comparePlot->addGraph();
             comparePlot->graph()->setPen(pen);
-            edfseek(0, 0, (long long)((((double)x) / ((double)hdr2.file_duration / (double)EDFLIB_TIME_DIMENSION)) * ((double)hdr2.signalparam[channel].smp_in_file)), EDFSEEK_SET);
+            //edfseek(0, 0, (long long)((((double)x) / ((double)hdr2.file_duration / (double)EDFLIB_TIME_DIMENSION)) * ((double)hdr2.signalparam[channel].smp_in_file)), EDFSEEK_SET);
         }
         int n, n2;
         n = edfread_physical_samples(handle, channel, samples_in_channel, buf);
@@ -251,9 +259,9 @@ void Display::on_submitSignalsButton_clicked()
         }*/
         for (int i = 0; i < n; i++)
         {
-            key += shift;
             ui->customPlot->graph()->addData(key, buf[i]+gap*((ui->selectedSignalsList->count()-1)/2-j));
             if(isComparePlotActive) comparePlot->graph()->addData(key, buf2[i]+gap*((ui->selectedSignalsList->count()-1)/2-j));
+            key += shift;
         }
     }
     ui->selectedSignalsList->clearSelection();
@@ -265,9 +273,9 @@ void Display::on_submitSignalsButton_clicked()
         comparePlot->replot();
     }
     free(buf);
-    free(buf2);
+    if (isComparePlotActive) free(buf2);
     edfclose_file(handle);
-    edfclose_file(handle2);
+    if (isComparePlotActive) edfclose_file(handle2);
 }
 
 void Display::on_PlayButton_clicked()
@@ -331,7 +339,88 @@ void Display::on_ZoomButton_clicked()
         comparePlot->replot();
     }
 }
+void Display::on_SpectrumButton_clicked()
+{
+    ui->customPlot->clearGraphs();
+    if (edfopen_file_readonly(filename.toStdString().c_str(), &hdr, EDFLIB_READ_ALL_ANNOTATIONS))
+    {
+        switch (hdr.filetype)
+        {
+        case EDFLIB_MALLOC_ERROR: qDebug() << "\nmalloc error\n\n";
+            break;
+        case EDFLIB_NO_SUCH_FILE_OR_DIRECTORY: qDebug() << "\ncannot open file, no such file or directory\n\n";
+            break;
+        case EDFLIB_FILE_CONTAINS_FORMAT_ERRORS: qDebug() << "\nthe file is not EDF(+) or BDF(+) compliant\n"
+            "(it contains format errors)\n\n";
+            break;
+        case EDFLIB_MAXFILES_REACHED: qDebug() << "\nto many files opened\n\n";
+            break;
+        case EDFLIB_FILE_READ_ERROR: qDebug() << "\na read error occurred\n\n";
+            break;
+        case EDFLIB_FILE_ALREADY_OPENED: qDebug() << "\nfile has already been opened\n\n";
+            break;
+        default: qDebug() << "\nunknown error\n\n";
+            break;
+        }
 
+        return;
+    }
+
+    int samplerate = hdr.signalparam[0].smp_in_datarecord;
+    //double shift = 1/double(samplerate);
+    int samples_in_channel = hdr.signalparam[0].smp_in_file;
+    double* buf;
+    buf = (double*)malloc(sizeof(double[samples_in_channel]));
+    if (buf == NULL)
+    {
+        printf("\nmalloc error\n");
+        edfclose_file(0);
+        return;
+    }
+    int channel;
+
+    int gap = 60000;
+    int handle = edflib_get_handle(0);
+    fftw_complex* out;
+    fftw_plan plan;
+    QSharedPointer<QCPAxisTickerFixed> tickerFixed(new QCPAxisTickerFixed);
+    ui->customPlot->xAxis->setTicker(tickerFixed);
+    if(isComparePlotActive) comparePlot->xAxis->setTicker(tickerFixed);
+    QPen pen;
+    for(int j = 0; j < ui->selectedSignalsList->count(); j++){
+
+        channel = channelToLabel.key(ui->selectedSignalsList->item(j)->text());
+        pen.setColor(colors.value(ui->customPlot->graphCount()%6));
+        //pen.setColor(QColor((175+(ui->customPlot->graphCount()%9*70))%256, (10+(ui->customPlot->graphCount()%9*80))%256, (90+(ui->customPlot->graphCount()%9*60))%256));
+        ui->customPlot->addGraph();
+        ui->customPlot->graph()->setPen(pen);
+        //edfseek(0, 0, (long long)((((double)x) / ((double)hdr.file_duration / (double)EDFLIB_TIME_DIMENSION)) * ((double)hdr.signalparam[channel].smp_in_file)), EDFSEEK_SET);
+
+        int n;
+        n = edfread_physical_samples(handle, channel, samples_in_channel, buf);
+        double freqShift = double(samplerate)/n;
+        out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * n);
+
+
+        plan = fftw_plan_dft_r2c_1d(n,buf,out,FFTW_ESTIMATE);
+        fftw_execute(plan);
+        fftw_destroy_plan(plan);
+
+        double key = 0;
+        for (int i = 0; i < n; i++)
+        {
+            ui->customPlot->graph()->addData(key, qSqrt(out[i][REAL]*out[i][REAL] + out[i][IMAG]*out[i][IMAG])+gap*((ui->selectedSignalsList->count()-1)/2-j));
+            key += freqShift;
+        }
+        fftw_free(out);
+    }
+    ui->selectedSignalsList->clearSelection();
+    //ui->customPlot->yAxis->setRange(gap*((ui->selectedSignalsList->count()-1)/2-(ui->selectedSignalsList->count()-1))+physMinRange-3, gap*((ui->selectedSignalsList->count()-1)/2)+physMaxRange+3);
+    ui->customPlot->yAxis->rescale();
+    ui->customPlot->replot();
+    free(buf);
+    edfclose_file(handle);
+}
 void Display::on_pushButton_clicked()
 {
     QMessageBox::information(this, "Управление", "Колесо мыши - перемещение по оси X<br>Колесо мыши + Ctrl - приближение/отдаление по горизонтальной оси<br>Колесо мыши + Shift - приближение/отдаление по обеим осям");
@@ -436,3 +525,4 @@ void Display::replotComparePlotSlot()
     comparePlot->yAxis->setRange(ui->customPlot->yAxis->range());
     comparePlot->replot();
 }
+

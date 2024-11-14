@@ -44,6 +44,8 @@ private slots:
     void replotMainPlotSlot();
     void replotComparePlotSlot();
 
+    void on_SpectrumButton_clicked();
+
 private:
     QString filename, compfilename;
     bool isComparePlotActive = false;

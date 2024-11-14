@@ -169,4 +169,5 @@ QString Application::getSensorsLogText(int num){
     if (num==3){
         return " { " + ui->spinBox_Freq_3->text()+ " Гц, " + ui->spinBox_DutyCycle_3->text()+"%, " +ui->timeEdit_3->time().toString("hh:mm:ss") + " }";
     }
+    else return "";
 }

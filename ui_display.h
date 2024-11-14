@@ -54,6 +54,7 @@ public:
     QPushButton *PlayButton;
     QPushButton *StopButton;
     QPushButton *ZoomButton;
+    QPushButton *SpectrumButton;
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButton;
     QStatusBar *statusBar;
@@ -198,8 +199,8 @@ public:
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         frame = new QFrame(controls);
         frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setMinimumSize(QSize(240, 40));
-        frame->setMaximumSize(QSize(240, 40));
+        frame->setMinimumSize(QSize(290, 40));
+        frame->setMaximumSize(QSize(290, 40));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         MoveLeftButton = new QPushButton(frame);
@@ -250,6 +251,13 @@ public:
         icon4.addFile(QString::fromUtf8("imgs/zoom-button.png"), QSize(), QIcon::Normal, QIcon::Off);
         ZoomButton->setIcon(icon4);
         ZoomButton->setIconSize(QSize(24, 24));
+        SpectrumButton = new QPushButton(frame);
+        SpectrumButton->setObjectName(QString::fromUtf8("SpectrumButton"));
+        SpectrumButton->setGeometry(QRect(250, 0, 40, 40));
+        SpectrumButton->setMinimumSize(QSize(40, 40));
+        SpectrumButton->setMaximumSize(QSize(40, 40));
+        SpectrumButton->setIcon(icon4);
+        SpectrumButton->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(frame);
 
@@ -284,7 +292,7 @@ public:
 
     void retranslateUi(QMainWindow *Display)
     {
-        Display->setWindowTitle(QCoreApplication::translate("Display", "MainWindow", nullptr));
+        Display->setWindowTitle(QCoreApplication::translate("Display", "\320\236\321\202\320\276\320\261\321\200\320\260\320\266\320\265\320\275\320\270\320\265 \320\255\320\255\320\223", nullptr));
         removeSignalsButton->setText(QCoreApplication::translate("Display", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", nullptr));
         addSignalsButton->setText(QCoreApplication::translate("Display", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
         submitSignalsButton->setText(QCoreApplication::translate("Display", "\320\222\321\213\320\262\320\265\321\201\321\202\320\270 \321\201\320\270\320\263\320\275\320\260\320\273\321\213", nullptr));
@@ -311,6 +319,10 @@ public:
         ZoomButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\230\321\201\321\205\320\276\320\264\320\275\320\276\320\265 \320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\272\320\260\320\274\320\265\321\200\321\213</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         ZoomButton->setText(QString());
+#if QT_CONFIG(tooltip)
+        SpectrumButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\230\321\201\321\205\320\276\320\264\320\275\320\276\320\265 \320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\272\320\260\320\274\320\265\321\200\321\213</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
+        SpectrumButton->setText(QString());
         pushButton->setText(QString());
     } // retranslateUi
 
