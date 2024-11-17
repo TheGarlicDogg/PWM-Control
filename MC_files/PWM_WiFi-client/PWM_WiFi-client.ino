@@ -3,6 +3,8 @@
 #include <cstring>
 #include "esp_wifi.h"
 #include "driver/ledc.h"
+#define STATUS_LED_GREEN_PIN 3
+#define STATUS_LED_RED_PIN 4
 #define LED_PIN_1          5
 #define LED_PIN_2          6 
 #define LED_PIN_3          7              // Номер IO
@@ -20,19 +22,17 @@ const char* password = "gar123lic";
 WiFiClient client;
 int config[9];
 IPAddress gateway;
+bool debugLedStatus = false;
+bool rdyToProcess = 0;
+bool rdyToExecute = 0;
+String data = "";
+String tok;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(STATUS_LED_GREEN_PIN, OUTPUT);
+  pinMode(STATUS_LED_RED_PIN, OUTPUT);
   esp_wifi_set_ps (WIFI_PS_NONE);
-  WiFi.begin(ssid,password);
-  while(WiFi.status() != WL_CONNECTED){
-    delay(500);
-    Serial.print(",");
-  }
-  Serial.print("connected to wi-fi!");
-  gateway = WiFi.gatewayIP();
-  Serial.print("GATEWAY: ");
-  Serial.println(gateway);
   ledcSetup(LEDC_CHANNEL_1, LEDC_BASE_FREQ, LEDC_TIMER_RESOLUTION);
   ledcSetup(LEDC_CHANNEL_2, LEDC_BASE_FREQ, LEDC_TIMER_RESOLUTION);
   ledcSetup(LEDC_CHANNEL_3, LEDC_BASE_FREQ, LEDC_TIMER_RESOLUTION);
@@ -45,18 +45,48 @@ void setup() {
   for (int i = 3; i < 9; i++){
     config[i] = 0;
   }
+  digitalWrite(STATUS_LED_GREEN_PIN, HIGH); // Отключен
+  digitalWrite(STATUS_LED_RED_PIN, HIGH);
+  Serial.println("nothing");
 }
 
 void loop() {
-  while(!client.connect(gateway, 8080)){
+  WiFi.begin(ssid,password);
+  while(WiFi.status() != WL_CONNECTED){ // Мигает желтым когда идет поключение к вайфай
+    Serial.print(",");
+    if(!debugLedStatus){
+      debugLedStatus = true;
+      digitalWrite(STATUS_LED_GREEN_PIN, LOW);
+      digitalWrite(STATUS_LED_RED_PIN, LOW);
+    } else{
+      debugLedStatus = false;
+      digitalWrite(STATUS_LED_GREEN_PIN, HIGH);
+      digitalWrite(STATUS_LED_RED_PIN, HIGH);
+    }
     delay(500);
-    Serial.print(".");
   }
-  Serial.print("connected to server!");
-  String data = "";
-  String tok;
-  bool rdyToProcess = 0;
-  bool rdyToExecute = 0;
+  Serial.print("connected to wi-fi!");
+
+  digitalWrite(STATUS_LED_GREEN_PIN, LOW); //Горит желтым когда идет подкючение к серверу
+  digitalWrite(STATUS_LED_RED_PIN, LOW);
+
+  gateway = WiFi.gatewayIP();
+  Serial.print("GATEWAY: ");
+  Serial.println(gateway);
+
+  while(!client.connect(gateway, 8080) && (WiFi.status() == WL_CONNECTED)){
+    Serial.print(".");
+    delay(500);
+  }
+
+  if(client.connected()){
+    Serial.println("connected to server!");
+    digitalWrite(STATUS_LED_RED_PIN, HIGH); //Горит зеленым когда подлючен к вай-фай и серверу
+    data = "";
+    rdyToProcess = 0;
+    rdyToExecute = 0;
+  }
+
   while (client.connected()) {            
       while (client.available()) {           
         char c = client.read();   
@@ -132,10 +162,16 @@ void loop() {
             } else  client.flush();
           }
           if (flag) break; 
+          if((millis()-startTime)%1000 < 500){
+            digitalWrite(STATUS_LED_GREEN_PIN, LOW);
+          } else{
+            digitalWrite(STATUS_LED_GREEN_PIN, HIGH);
+          }
         }
         ledcWrite(LEDC_CHANNEL_1, 0);
         ledcWrite(LEDC_CHANNEL_2, 0);
         ledcWrite(LEDC_CHANNEL_3, 0);
+        digitalWrite(STATUS_LED_GREEN_PIN, LOW);
       }
   }
 }
