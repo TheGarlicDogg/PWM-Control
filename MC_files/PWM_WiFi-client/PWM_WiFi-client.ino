@@ -47,11 +47,10 @@ void setup() {
   }
   digitalWrite(STATUS_LED_GREEN_PIN, HIGH); // Отключен
   digitalWrite(STATUS_LED_RED_PIN, HIGH);
-  Serial.println("nothing");
+  WiFi.begin(ssid,password);
 }
 
 void loop() {
-  WiFi.begin(ssid,password);
   while(WiFi.status() != WL_CONNECTED){ // Мигает желтым когда идет поключение к вайфай
     Serial.print(",");
     if(!debugLedStatus){
