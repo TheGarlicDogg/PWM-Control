@@ -65,49 +65,49 @@ void Application::on_pushButton_clicked()
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу всех датчиков c параметрами" + getSensorsLogText(1) + getSensorsLogText(2) + getSensorsLogText(3);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу всех диодов c параметрами" + getSensorsLogText(1) + getSensorsLogText(2) + getSensorsLogText(3);
     } else if (ui->comboBox_Client_List->currentText() == "1"){
         QString Message_For_Client = ui->spinBox_Freq->text()+" "+ui->spinBox_DutyCycle->text()+" "+QString::number(ui->timeEdit->time().hour()*3600+ui->timeEdit->time().minute()*60+ui->timeEdit->time().second())+" 10 0 0 10 0 0"+"\n";
         qDebug() << Message_For_Client;
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 1 датчика c параметрами" + getSensorsLogText(1);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 1 диода c параметрами" + getSensorsLogText(1);
     } else if (ui->comboBox_Client_List->currentText() == "2"){
         QString Message_For_Client = "10 0 0 " + ui->spinBox_Freq_2->text()+" "+ui->spinBox_DutyCycle_2->text()+" "+QString::number(ui->timeEdit_2->time().hour()*3600+ui->timeEdit_2->time().minute()*60+ui->timeEdit_2->time().second())+ " 10 0 0" +"\n";
         qDebug() << Message_For_Client;
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 2 датчика c параметрами" + getSensorsLogText(2);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 2 диода c параметрами" + getSensorsLogText(2);
     } else if (ui->comboBox_Client_List->currentText() == "3"){
         QString Message_For_Client = "10 0 0 10 0 0 " + ui->spinBox_Freq_3->text()+" "+ui->spinBox_DutyCycle_3->text()+" "+QString::number(ui->timeEdit_3->time().hour()*3600+ui->timeEdit_3->time().minute()*60+ui->timeEdit_3->time().second())+"\n";
         qDebug() << Message_For_Client;
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 3 датчика c параметрами" + getSensorsLogText(3);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 3 диода c параметрами" + getSensorsLogText(3);
     } else if (ui->comboBox_Client_List->currentText() == "1 & 2"){
         QString Message_For_Client = ui->spinBox_Freq->text()+" "+ui->spinBox_DutyCycle->text()+" "+QString::number(ui->timeEdit->time().hour()*3600+ui->timeEdit->time().minute()*60+ui->timeEdit->time().second())+" "+ui->spinBox_Freq_2->text()+" "+ui->spinBox_DutyCycle_2->text()+" "+QString::number(ui->timeEdit_2->time().hour()*3600+ui->timeEdit_2->time().minute()*60+ui->timeEdit_2->time().second())+ " 10 0 0"+"\n";
         qDebug() << Message_For_Client;
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 1 и 2 датчика c параметрами" + getSensorsLogText(1)+ getSensorsLogText(2);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 1 и 2 диода c параметрами" + getSensorsLogText(1)+ getSensorsLogText(2);
     } else if (ui->comboBox_Client_List->currentText() == "1 & 3"){
         QString Message_For_Client = ui->spinBox_Freq->text()+" "+ui->spinBox_DutyCycle->text()+" "+QString::number(ui->timeEdit->time().hour()*3600+ui->timeEdit->time().minute()*60+ui->timeEdit->time().second())+ " 10 0 0 "+ui->spinBox_Freq_3->text()+" "+ui->spinBox_DutyCycle_3->text()+" "+QString::number(ui->timeEdit_3->time().hour()*3600+ui->timeEdit_3->time().minute()*60+ui->timeEdit_3->time().second())+"\n";
         qDebug() << Message_For_Client;
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 1 и 3 датчика c параметрами" + getSensorsLogText(1) + getSensorsLogText(3);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 1 и 3 диода c параметрами" + getSensorsLogText(1) + getSensorsLogText(3);
     } else if (ui->comboBox_Client_List->currentText() == "2 & 3"){
         QString Message_For_Client = "10 0 0 " + ui->spinBox_Freq_2->text()+" "+ui->spinBox_DutyCycle_2->text()+" "+QString::number(ui->timeEdit_2->time().hour()*3600+ui->timeEdit_2->time().minute()*60+ui->timeEdit_2->time().second())+" " + ui->spinBox_Freq_3->text()+" "+ui->spinBox_DutyCycle_3->text()+" "+QString::number(ui->timeEdit_3->time().hour()*3600+ui->timeEdit_3->time().minute()*60+ui->timeEdit_3->time().second())+"\n";
         qDebug() << Message_For_Client;
         foreach(QTcpSocket *socket, Client_Connection_List){
             socket->write(Message_For_Client.toStdString().c_str());
         }
-        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 2 и 3 датчика c параметрами" + getSensorsLogText(2)+ getSensorsLogText(3);
+        Log_Message = QDateTime::currentDateTime().toString("hh:mm:ss") + " -> Сервер запустил работу 2 и 3 диода c параметрами" + getSensorsLogText(2)+ getSensorsLogText(3);
     }
 
     /*

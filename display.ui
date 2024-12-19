@@ -296,13 +296,13 @@
       <property name="minimumSize">
        <size>
         <width>770</width>
-        <height>40</height>
+        <height>30</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>40</height>
+        <height>30</height>
        </size>
       </property>
       <property name="mouseTracking">
@@ -401,18 +401,14 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
+            <pointsize>10</pointsize>
            </font>
           </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1 сек. назад&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>imgs/left-button.png</normaloff>imgs/left-button.png</iconset>
+           <string>&lt;-</string>
           </property>
           <property name="iconSize">
            <size>
@@ -442,15 +438,16 @@
             <height>40</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1 сек. вперед&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>imgs/right-button.png</normaloff>imgs/right-button.png</iconset>
+           <string>-&gt;</string>
           </property>
           <property name="iconSize">
            <size>
@@ -480,6 +477,11 @@
             <height>40</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Воспроизведение&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -487,11 +489,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>imgs/play-button.png</normaloff>imgs/play-button.png</iconset>
+           <string>В</string>
           </property>
           <property name="iconSize">
            <size>
@@ -524,15 +522,16 @@
             <height>40</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Стоп&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>imgs/stop-button.png</normaloff>imgs/stop-button.png</iconset>
+           <string>Ст</string>
           </property>
           <property name="iconSize">
            <size>
@@ -565,15 +564,16 @@
             <height>40</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Исходное положение камеры&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>imgs/zoom-button.png</normaloff>imgs/zoom-button.png</iconset>
+           <string>К</string>
           </property>
           <property name="iconSize">
            <size>
@@ -603,15 +603,16 @@
             <height>40</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Исходное положение камеры&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>imgs/zoom-button.png</normaloff>imgs/zoom-button.png</iconset>
+           <string>Сп</string>
           </property>
           <property name="iconSize">
            <size>
@@ -649,12 +650,13 @@
            <height>40</height>
           </size>
          </property>
-         <property name="text">
-          <string/>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
          </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>imgs/information-button.png</normaloff>imgs/information-button.png</iconset>
+         <property name="text">
+          <string>И</string>
          </property>
          <property name="iconSize">
           <size>

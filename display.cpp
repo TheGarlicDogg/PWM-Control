@@ -39,11 +39,11 @@ Display::Display(QString fileadr, QWidget *parent) : QMainWindow(parent),
     ui->customPlot->axisRect()->setRangeZoom(Qt::Horizontal);
 
     ui->plotsFrame->layout()->setMargin(0);
-    addPlotButton = new QPushButton("+", ui->plotsFrame);
-    addPlotButton->setGeometry(0,0,30,30);
-    addPlotButton->raise();
+    //addPlotButton = new QPushButton("+", ui->plotsFrame);
+    //addPlotButton->setGeometry(0,0,30,30);
+    //addPlotButton->raise();
 
-    connect(addPlotButton, &QAbstractButton::clicked, this, &Display::addPlot);
+    //connect(addPlotButton, &QAbstractButton::clicked, this, &Display::addPlot);
     connect(playBackTimer, &QTimer::timeout, this, &Display::PlaybackStep);
     connect(ui->customPlot, SIGNAL(mouseWheel(QWheelEvent*)), this, SLOT(mouseWheelMain(QWheelEvent*)));
     ui->customPlot->replot();
@@ -479,12 +479,7 @@ void Display::addPlot()
 
 
 }
-void Display::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event);
-    // We update the button positions for each resize event of the main window
-    updateButtonPosition();
-}
+
 void Display::mouseWheelMain(QWheelEvent * event){
     mouseWheel(event, ui->customPlot);
     if(isComparePlotActive) QTimer::singleShot(25, this, &Display::replotComparePlotSlot);

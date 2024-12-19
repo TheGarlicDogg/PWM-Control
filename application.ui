@@ -140,13 +140,13 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>241</width>
+      <width>441</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="autoFillBackground">
@@ -161,13 +161,13 @@
      <rect>
       <x>20</x>
       <y>150</y>
-      <width>271</width>
+      <width>441</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="autoFillBackground">
@@ -182,13 +182,13 @@
      <rect>
       <x>20</x>
       <y>240</y>
-      <width>321</width>
+      <width>431</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="autoFillBackground">
@@ -209,7 +209,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -248,7 +248,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -281,7 +281,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -340,7 +340,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -379,7 +379,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -418,7 +418,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -454,7 +454,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -490,7 +490,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -523,7 +523,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -556,14 +556,14 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
     </property>
     <property name="text">
-     <string>Датчик 1</string>
+     <string>Диод 1</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -577,14 +577,14 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
     </property>
     <property name="text">
-     <string>Датчик 2</string>
+     <string>Диод 2</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
@@ -598,14 +598,14 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
     </property>
     <property name="text">
-     <string>Датчик 3</string>
+     <string>Диод 3</string>
     </property>
    </widget>
    <widget class="Line" name="line">

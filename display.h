@@ -18,8 +18,6 @@ public:
     explicit Display(QWidget *parent = nullptr);
     explicit Display(QString filename, QWidget *parent = nullptr);
 
-
-    virtual void resizeEvent(QResizeEvent *event) override;
     ~Display();
 
 private slots:

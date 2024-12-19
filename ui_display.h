@@ -10,7 +10,6 @@
 #define UI_DISPLAY_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
@@ -177,8 +176,8 @@ public:
 
         timeSlider = new QSlider(centralwidget);
         timeSlider->setObjectName(QString::fromUtf8("timeSlider"));
-        timeSlider->setMinimumSize(QSize(770, 40));
-        timeSlider->setMaximumSize(QSize(16777215, 40));
+        timeSlider->setMinimumSize(QSize(770, 30));
+        timeSlider->setMaximumSize(QSize(16777215, 30));
         timeSlider->setMouseTracking(true);
         timeSlider->setMaximum(98);
         timeSlider->setSingleStep(0);
@@ -208,28 +207,23 @@ public:
         MoveLeftButton->setGeometry(QRect(100, 0, 40, 40));
         MoveLeftButton->setMinimumSize(QSize(40, 40));
         MoveLeftButton->setMaximumSize(QSize(40, 40));
-        MoveLeftButton->setFont(font);
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("imgs/left-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        MoveLeftButton->setIcon(icon);
+        QFont font1;
+        font1.setPointSize(10);
+        MoveLeftButton->setFont(font1);
         MoveLeftButton->setIconSize(QSize(24, 24));
         MoveRightButton = new QPushButton(frame);
         MoveRightButton->setObjectName(QString::fromUtf8("MoveRightButton"));
         MoveRightButton->setGeometry(QRect(150, 0, 40, 40));
         MoveRightButton->setMinimumSize(QSize(40, 40));
         MoveRightButton->setMaximumSize(QSize(40, 40));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8("imgs/right-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        MoveRightButton->setIcon(icon1);
+        MoveRightButton->setFont(font1);
         MoveRightButton->setIconSize(QSize(24, 24));
         PlayButton = new QPushButton(frame);
         PlayButton->setObjectName(QString::fromUtf8("PlayButton"));
         PlayButton->setGeometry(QRect(0, 0, 40, 40));
         PlayButton->setMinimumSize(QSize(40, 40));
         PlayButton->setMaximumSize(QSize(40, 40));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8("imgs/play-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        PlayButton->setIcon(icon2);
+        PlayButton->setFont(font1);
         PlayButton->setIconSize(QSize(24, 24));
         PlayButton->setCheckable(false);
         StopButton = new QPushButton(frame);
@@ -237,9 +231,7 @@ public:
         StopButton->setGeometry(QRect(50, 0, 40, 40));
         StopButton->setMinimumSize(QSize(40, 40));
         StopButton->setMaximumSize(QSize(40, 40));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8("imgs/stop-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        StopButton->setIcon(icon3);
+        StopButton->setFont(font1);
         StopButton->setIconSize(QSize(24, 24));
         StopButton->setCheckable(false);
         ZoomButton = new QPushButton(frame);
@@ -247,16 +239,14 @@ public:
         ZoomButton->setGeometry(QRect(200, 0, 40, 40));
         ZoomButton->setMinimumSize(QSize(40, 40));
         ZoomButton->setMaximumSize(QSize(40, 40));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8("imgs/zoom-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        ZoomButton->setIcon(icon4);
+        ZoomButton->setFont(font1);
         ZoomButton->setIconSize(QSize(24, 24));
         SpectrumButton = new QPushButton(frame);
         SpectrumButton->setObjectName(QString::fromUtf8("SpectrumButton"));
         SpectrumButton->setGeometry(QRect(250, 0, 40, 40));
         SpectrumButton->setMinimumSize(QSize(40, 40));
         SpectrumButton->setMaximumSize(QSize(40, 40));
-        SpectrumButton->setIcon(icon4);
+        SpectrumButton->setFont(font1);
         SpectrumButton->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(frame);
@@ -269,9 +259,7 @@ public:
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setMinimumSize(QSize(40, 40));
         pushButton->setMaximumSize(QSize(40, 40));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8("imgs/information-button.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon5);
+        pushButton->setFont(font1);
         pushButton->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(pushButton);
@@ -299,31 +287,31 @@ public:
 #if QT_CONFIG(tooltip)
         MoveLeftButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>1 \321\201\320\265\320\272. \320\275\320\260\320\267\320\260\320\264</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        MoveLeftButton->setText(QString());
+        MoveLeftButton->setText(QCoreApplication::translate("Display", "<-", nullptr));
 #if QT_CONFIG(tooltip)
         MoveRightButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>1 \321\201\320\265\320\272. \320\262\320\277\320\265\321\200\320\265\320\264</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        MoveRightButton->setText(QString());
+        MoveRightButton->setText(QCoreApplication::translate("Display", "->", nullptr));
 #if QT_CONFIG(tooltip)
         PlayButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\222\320\276\321\201\320\277\321\200\320\276\320\270\320\267\320\262\320\265\320\264\320\265\320\275\320\270\320\265</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(whatsthis)
         PlayButton->setWhatsThis(QCoreApplication::translate("Display", "<html><head/><body><p><br/></p></body></html>", nullptr));
 #endif // QT_CONFIG(whatsthis)
-        PlayButton->setText(QString());
+        PlayButton->setText(QCoreApplication::translate("Display", "\320\222", nullptr));
 #if QT_CONFIG(tooltip)
         StopButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\241\321\202\320\276\320\277</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        StopButton->setText(QString());
+        StopButton->setText(QCoreApplication::translate("Display", "\320\241\321\202", nullptr));
 #if QT_CONFIG(tooltip)
         ZoomButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\230\321\201\321\205\320\276\320\264\320\275\320\276\320\265 \320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\272\320\260\320\274\320\265\321\200\321\213</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        ZoomButton->setText(QString());
+        ZoomButton->setText(QCoreApplication::translate("Display", "\320\232", nullptr));
 #if QT_CONFIG(tooltip)
         SpectrumButton->setToolTip(QCoreApplication::translate("Display", "<html><head/><body><p>\320\230\321\201\321\205\320\276\320\264\320\275\320\276\320\265 \320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\265 \320\272\320\260\320\274\320\265\321\200\321\213</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        SpectrumButton->setText(QString());
-        pushButton->setText(QString());
+        SpectrumButton->setText(QCoreApplication::translate("Display", "\320\241\320\277", nullptr));
+        pushButton->setText(QCoreApplication::translate("Display", "\320\230", nullptr));
     } // retranslateUi
 
 };
